@@ -1,0 +1,5 @@
+(library
+ (public_name swhid_compute)
+ (wrapped false)
+ (modules swhid_compute)
+ (libraries swhid_types))

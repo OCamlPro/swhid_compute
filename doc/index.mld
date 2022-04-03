@@ -1,0 +1,17 @@
+{0 swhid_compute}
+
+{{:https://https://git.zapashcanon.fr/zapashcanon/swhid_compute} swhid_compute} is an {{:https://ocaml.org} OCaml} library/executable to TODO.
+
+{1:api API}
+
+{!modules:
+Swhid_compute
+}
+
+{1:private_api Private API}
+
+You shouldn't have to use any of these modules, they're used internally only.
+
+{!modules:
+TODO
+}
