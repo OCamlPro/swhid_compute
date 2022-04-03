@@ -24,6 +24,8 @@
   (ocaml
    (>= 4.08))
   swhid_types
+  (digestif
+    :with-test)
   (bisect_ppx
    (and
     :with-test
