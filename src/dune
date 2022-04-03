@@ -2,4 +2,6 @@
  (public_name swhid_compute)
  (wrapped false)
  (modules swhid_compute)
+ (instrumentation
+  (backend bisect_ppx))
  (libraries swhid_types))
