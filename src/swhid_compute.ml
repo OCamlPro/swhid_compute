@@ -38,8 +38,7 @@ struct
       | "tag" | "tree" ->
         Format.fprintf fmt "%s %d\x00" git_type len
       | git_type ->
-        raise
-        @@ Invalid_argument
+        invalid_arg
           (Format.sprintf "invalid git object type `%s` (Git.object_header)"
               git_type )
 
@@ -122,7 +121,7 @@ struct
     List.iter
       (fun entry ->
           if Swhid_types.object_id_invalid entry.target then
-            raise @@ Invalid_argument "target must be of length 40" )
+            invalid_arg "target must be of length 40" )
       entries;
     let entries =
       List.sort
@@ -177,7 +176,7 @@ struct
   let release_identifier target target_type name ~author date ~message :
     Swhid_types.identifier option =
     if Swhid_types.object_id_invalid target then
-      raise @@ Invalid_argument "target must be of length 40";
+      invalid_arg "target must be of length 40";
 
     let buff = Buffer.create 512 in
     let fmt = Format.formatter_of_buffer buff in
@@ -219,8 +218,7 @@ struct
   let revision_identifier directory parents ~author ~author_date ~committer
       ~committer_date extra_headers message : Swhid_types.identifier option =
     if List.exists Swhid_types.object_id_invalid (directory :: parents) then
-      raise
-      @@ Invalid_argument "target (directory and parents) must be of length 40";
+      invalid_arg "target (directory and parents) must be of length 40";
 
     let buff = Buffer.create 512 in
     let fmt = Format.formatter_of_buffer buff in
@@ -286,8 +284,7 @@ struct
                   (Git.id_to_bytes target, target_type, 20)
                 | "alias" -> (target, "alias", String.length target)
                 | target_type ->
-                  raise
-                  @@ Invalid_argument
+                  invalid_arg
                     (Format.sprintf
                         "invalid target type: `%s` (Compute.snapshot_identifier)"
                         target_type ) )
