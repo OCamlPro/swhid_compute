@@ -1,7 +1,15 @@
 module Make (SHA1 : sig
     val digest_string_to_hex : string -> string
-  end) =
+  end) (OS : sig
+          val contents : string -> string list option
+          val typ : string -> string option
+          val read_file : string -> string option
+          val permissions : string -> int option
+        end) =
 struct
+
+  (**/**)
+
   module Git = struct
     let target_type_to_git = function
       | Swhid_types.Content _hash_type -> "blob"
@@ -62,6 +70,8 @@ struct
         Format.fprintf fmt " %d %a" timestamp format_offset
           (tz_offset, negative_utc)
   end
+
+  (**/**)
 
   (** This module provides various functions to compute the swhid of a given
       object. Supported objects are [content], [directory], [release], [revision]
@@ -133,6 +143,31 @@ struct
     in
     let git_object = Git.object_from_contents Directory content in
     Git.object_to_swhid git_object [] Swhid_types.directory
+
+  (** [directory_identifier_deep] compute the swhid for a given directory name, it uses the various functions provided in the [OS] module parameter to list directory contents, get file permissions and read file contents.*)
+  let rec directory_identifier_deep name : Swhid_types.identifier option =
+    match OS.contents name with
+    | None -> None
+    | Some contents ->
+      let entries = List.map (fun name ->
+        let typ = OS.typ name in
+        let target = match typ with
+          | Some "file" -> begin match OS.read_file name with
+            | None -> None
+            | Some content -> content_identifier content
+          end
+          | Some "directory" -> directory_identifier_deep name
+          | _unknown_type -> None
+        in
+        let permissions = OS.permissions name in
+        match typ, permissions, target with
+        | Some typ, Some permissions, Some target ->
+          let target = Swhid_types.get_object_id target in
+          Some { typ; permissions; target; name }
+        | _ -> None
+      ) contents in
+      if List.exists Option.is_none entries then None
+      else directory_identifier (List.map Option.get entries)
 
   (** [release_identifier target target_type name ~author date ~message] computes
       the swhid for a release object poiting to an object of type [target_type]

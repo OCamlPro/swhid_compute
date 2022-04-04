@@ -3,6 +3,33 @@ open Swhid_types
 module Swhid_compute = Swhid_compute.Make (struct
   let digest_string_to_hex v =
     Digestif.SHA1.to_hex @@ Digestif.SHA1.digest_string v
+end) (struct
+  let contents name =
+    let name = Fpath.v name in
+    match Bos.OS.Dir.contents ~dotfiles:true ~rel:false name with
+    | Ok contents -> Some (List.map Fpath.to_string contents)
+    | Error _e -> None
+
+  let typ name =
+    let name = Fpath.v name in
+    match Bos.OS.File.exists name with
+    | Ok true -> Some "file"
+    | Ok false | Error _ -> match Bos.OS.Dir.exists name with
+      | Ok true -> Some "directory"
+      | Ok false | Error _ -> None
+
+  let read_file name =
+    let name = Fpath.v name in
+    match Bos.OS.File.read name with
+    | Ok content -> Some content
+    | _ -> None
+
+  let permissions name =
+    let name = Fpath.v name in
+    match Bos.OS.Path.stat name with
+    | Ok stats -> Some stats.st_perm
+    | Error _e -> None
+
 end)
 
 let type_to_string =

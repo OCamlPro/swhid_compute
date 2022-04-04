@@ -26,6 +26,8 @@
   swhid_types
   (digestif
     :with-test)
+  (bos
+    :with-test)
   (bisect_ppx
    (and
     :with-test
