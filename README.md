@@ -39,4 +39,6 @@ For more, have a look at the [example] folder, at the [documentation] or at the 
 [how to install opam]: https://opam.ocaml.org/doc/Install.html
 [OCaml]: https://ocaml.org
 [opam]: https://opam.ocaml.org/
+[persistent identifiers]: https://docs.softwareheritage.org/devel/swh-model/persistent-identifiers.html
+[Software Heritage]: https://www.softwareheritage.org
 [swhid_compute]: https://github.com/ocamlpro/swhid_compute
