@@ -785,7 +785,7 @@ struct
       <span data-count="19">m</span>atch date with
       | <span data-count="0">N</span>one -&gt; ()
       | <span data-count="19">S</span>ome (timestamp, tz_offset, negative_utc) -&gt;
-        Format.fprintf fmt " %d %a" timestamp format_offset
+        Format.fprintf fmt " %Ld %a" timestamp format_offset
           (tz_offset, negative_utc)
   end
 
@@ -810,7 +810,7 @@ struct
 
   (** The type for dates, needed to compute releases and revisions identifiers. *)
   type date =
-    { timestamp : int
+    { timestamp : Int64.t
     ; tz_offset : int
     ; negative_utc : bool
     }
