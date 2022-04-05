@@ -533,3 +533,13 @@ let () =
     let (_scheme_version, _o_type, identifier), _qualifiers = identifier in
     if not ok then Format.eprintf "NOT OK, got: `%s`@." identifier;
     assert ok
+
+(* test directory_identifier_deep with not existing directory *)
+let () =
+  match
+    Swhid_compute.directory_identifier_deep
+      "jamais on n'a vu, jamais on ne verra, la famille tortue courir après \
+       les rats"
+  with
+  | Some _identifier -> assert false
+  | None -> ()
