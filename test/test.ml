@@ -42,8 +42,7 @@ module Swhid_compute =
             | Error _e -> none
       *)
       let permissions = function
-        | "swh:1:dir:05a38fcda98c037d0a9fa48d955acb7d7b0a884c/media" ->
-          Some 16384
+        | "test_src/media" -> Some 16384
         | _name -> Some 33188
 
       let base name =
