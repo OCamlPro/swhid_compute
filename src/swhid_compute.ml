@@ -1,14 +1,28 @@
 module Make (SHA1 : sig
+  (** [digest_string_to_hex s] computes the SHA1 hash of [s] and returns its
+      hexadecimal representation. *)
   val digest_string_to_hex : string -> string
 end) (OS : sig
+  (** [contents dir] returns the list of files in the directory [dir]. *)
   val contents : string -> string list option
 
+  (** [type file] returns ["dir"] if [file] is a directory and ["file"]
+      otherwise. *)
   val typ : string -> string option
 
+  (** [read_file f] returns the content of the file [f]. *)
   val read_file : string -> string option
 
+  (** [permissions f] returns the 16-bit file mode (as stored by Git) of the
+      file [f]. That is:
+
+      - 0o120000 if [f] is a symlink
+      - 0o040000 if [f] is a directory
+      - 0o100755 if [f] is an executable file
+      - 0o100644 if [f] is a regular file *)
   val permissions : string -> int option
 
+  (** [base f] is the basename of file [f]. *)
   val base : string -> string
 end) =
 struct

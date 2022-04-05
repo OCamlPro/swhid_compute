@@ -1,6 +1,8 @@
-# swhid_compute
+# swhid_compute [![Actions Status](https://github.com/ocamlpro/swhid_compute/workflows/build/badge.svg)](https://github.com/ocamlpro/swhid_compute/actions) [![coverage percentage](https://raw.githubusercontent.com/ocamlpro/swhid_compute/gh-pages/coverage/badge.svg)](https://ocamlpro.github.io/swhid_compute/coverage/)
 
-[swhid_compute] is an [OCaml] executable/library to TODO.
+[swhid_compute] is an [OCaml] library to work with [persistent identifiers] found in [Software Heritage], also known as swhid.
+
+This library only contains the `Compute` module.
 
 ## Installation
 
@@ -33,8 +35,8 @@ For more, have a look at the [example] folder, at the [documentation] or at the 
 [opam file]: ./swhid_compute.opam
 [test suite]: ./test
 
-[documentation]: https://doc.zapashcanon.fr/swhid_compute
+[documentation]: https://ocamlpro.github.io/swhid_compute
 [how to install opam]: https://opam.ocaml.org/doc/Install.html
 [OCaml]: https://ocaml.org
 [opam]: https://opam.ocaml.org/
-[swhid_compute]: https://git.zapashcanon.fr/zapashcanon/swhid_compute
+[swhid_compute]: https://github.com/ocamlpro/swhid_compute

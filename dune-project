@@ -15,11 +15,11 @@
 
 (package
  (name swhid_compute)
- (synopsis "OCaml library to work with Software Heritage identifiers")
+ (synopsis "OCaml library to work with Software Heritage identifiers, compute library used in swhid")
  (description
-  "swhid is an OCaml library to work with persistent identifiers found in Software Heritage")
+  "swhid is an OCaml library to work with persistent identifiers found in Software Heritage,  it contains the types module used by others libraries.")
  (tags
-  (swh software heritage archive shwid persistent identifier))
+  (swh software heritage archive shwid persistent identifier compute))
  (depends
   (ocaml
    (>= 4.08))
