@@ -16,10 +16,10 @@ end) (OS : sig
   (** [permissions f] returns the 16-bit file mode (as stored by Git) of the
       file [f]. That is:
 
-      - 0o120000 if [f] is a symlink
-      - 0o040000 if [f] is a directory
-      - 0o100755 if [f] is an executable file
-      - 0o100644 if [f] is a regular file *)
+      - [0o120000] if [f] is a symlink
+      - [0o040000] if [f] is a directory
+      - [0o100755] if [f] is an executable file
+      - [0o100644] if [f] is a regular file *)
   val permissions : string -> int option
 
   (** [base f] is the basename of file [f]. *)
