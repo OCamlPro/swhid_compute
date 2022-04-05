@@ -84,7 +84,7 @@ struct
       match date with
       | None -> ()
       | Some (timestamp, tz_offset, negative_utc) ->
-        Format.fprintf fmt " %d %a" timestamp format_offset
+        Format.fprintf fmt " %Ld %a" timestamp format_offset
           (tz_offset, negative_utc)
   end
 
@@ -109,7 +109,7 @@ struct
 
   (** The type for dates, needed to compute releases and revisions identifiers. *)
   type date =
-    { timestamp : int
+    { timestamp : Int64.t
     ; tz_offset : int
     ; negative_utc : bool
     }

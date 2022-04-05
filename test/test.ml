@@ -99,7 +99,7 @@ let () =
        , "v2.6.14"
        , Some "Linus Torvalds <torvalds@g5.osdl.org>"
        , Some
-           { Swhid_compute.timestamp = 1130457753
+           { Swhid_compute.timestamp = 1130457753L
            ; tz_offset = -420
            ; negative_utc = false
            }
@@ -117,7 +117,8 @@ let () =
        , Revision
        , "v2.6.12"
        , None
-       , Some { timestamp = 1130457753; tz_offset = -420; negative_utc = false }
+       , Some
+           { timestamp = 1130457753L; tz_offset = -420; negative_utc = false }
        , Some
            "This is the final 2.6.12 release\n\
             -----BEGIN PGP SIGNATURE-----\n\
@@ -132,7 +133,8 @@ let () =
        , Revision
        , "v2.6.12"
        , Some "Linus Torvalds <torvalds@g5.osdl.org>"
-       , Some { timestamp = 1130457753; tz_offset = -420; negative_utc = false }
+       , Some
+           { timestamp = 1130457753L; tz_offset = -420; negative_utc = false }
        , None
        , ((1, Release, "b6f4f446715f7d9543ef54e41b62982f0db40045"), []) )
        (* Empty message *)
@@ -140,7 +142,8 @@ let () =
        , Revision
        , "v2.6.12"
        , Some "Linus Torvalds <torvalds@g5.osdl.org>"
-       , Some { timestamp = 1130457753; tz_offset = -420; negative_utc = false }
+       , Some
+           { timestamp = 1130457753L; tz_offset = -420; negative_utc = false }
        , Some ""
        , ((1, Release, "71a0aea72444d396575dc25ac37fec87ee3c6492"), []) )
        (* Negative utc *)
@@ -148,7 +151,7 @@ let () =
        , Revision
        , "20081029"
        , Some "Otavio Salvador <otavio@debian.org>"
-       , Some { timestamp = 1225281976; tz_offset = 0; negative_utc = true }
+       , Some { timestamp = 1225281976L; tz_offset = 0; negative_utc = true }
        , Some "tagging version 20081029\n\nr56558\n"
        , ((1, Release, "97c8d2573a001f88e72d75f596cf86b12b82fd01"), []) )
        (* newline in author *)
@@ -156,7 +159,7 @@ let () =
        , Revision
        , "0.3.2"
        , Some "Eugene Janusov\n<esycat@gmail.com>"
-       , Some { timestamp = 1377480558; tz_offset = 600; negative_utc = false }
+       , Some { timestamp = 1377480558L; tz_offset = 600; negative_utc = false }
        , Some "Release of v0.3.2."
        , ((1, Release, "5c98f559d034162de22d3ebeb95433e6f8885231"), []) )
     |]
@@ -195,13 +198,13 @@ let () =
        , [ "01e2d0627a9a6edb24c37db45db5ecb31e9de808" ]
        , "Linus Torvalds <torvalds@linux-foundation.org>"
        , Some
-           { Swhid_compute.timestamp = 1436739030
+           { Swhid_compute.timestamp = 1436739030L
            ; tz_offset = -420
            ; negative_utc = false
            }
        , "Linus Torvalds <torvalds@linux-foundation.org>"
        , Some
-           { Swhid_compute.timestamp = 1436739030
+           { Swhid_compute.timestamp = 1436739030L
            ; tz_offset = -420
            ; negative_utc = false
            }
@@ -212,9 +215,9 @@ let () =
        , "d11f00a6a0fea6055341d25584b5a96516c0d2b8"
        , []
        , "Software Heritage <robot@softwareheritage.org>"
-       , Some { timestamp = 1437047495; tz_offset = 0; negative_utc = false }
+       , Some { timestamp = 1437047495L; tz_offset = 0; negative_utc = false }
        , "Software Heritage <robot@softwareheritage.org>"
-       , Some { timestamp = 1437047495; tz_offset = 0; negative_utc = false }
+       , Some { timestamp = 1437047495L; tz_offset = 0; negative_utc = false }
        , Some "synthetic revision message\n"
        , [||] )
        (* with extra headers *)
@@ -222,9 +225,11 @@ let () =
        , "85a74718d377195e1efd0843ba4f3260bad4fe07"
        , [ "01e2d0627a9a6edb24c37db45db5ecb31e9de808" ]
        , "Linus Torvalds <torvalds@linux-foundation.org>"
-       , Some { timestamp = 1436739030; tz_offset = -420; negative_utc = false }
+       , Some
+           { timestamp = 1436739030L; tz_offset = -420; negative_utc = false }
        , "Linus Torvalds <torvalds@linux-foundation.org>"
-       , Some { timestamp = 1436739030; tz_offset = -420; negative_utc = false }
+       , Some
+           { timestamp = 1436739030L; tz_offset = -420; negative_utc = false }
        , Some "Linux 4.2-rc2\n"
        , [| ("svn-repo-uuid", "046f1af7-66c2-d61b-5410-ce57b7db7bff")
           ; ("svn-revision", "10")
@@ -236,9 +241,9 @@ let () =
          ; "c888305e1efbaa252d01b4e5e6b778f865a97514"
          ]
        , "Jiang Xin <worldhello.net@gmail.com>"
-       , Some { timestamp = 1428538899; tz_offset = 480; negative_utc = false }
+       , Some { timestamp = 1428538899L; tz_offset = 480; negative_utc = false }
        , "Jiang Xin <worldhello.net@gmail.com>"
-       , Some { timestamp = 1428538899; tz_offset = 480; negative_utc = false }
+       , Some { timestamp = 1428538899L; tz_offset = 480; negative_utc = false }
        , Some
            "Merge branch 'master' of git://github.com/alexhenrie/git-po\n\n\
             * 'master' of git://github.com/alexhenrie/git-po:\n\
@@ -268,9 +273,9 @@ let () =
          ; "c888305e1efbaa252d01b4e5e6b778f865a97514"
          ]
        , "Jiang Xin <worldhello.net@gmail.com>"
-       , Some { timestamp = 1428538899; tz_offset = 480; negative_utc = false }
+       , Some { timestamp = 1428538899L; tz_offset = 480; negative_utc = false }
        , "Jiang Xin <worldhello.net@gmail.com>"
-       , Some { timestamp = 1428538899; tz_offset = 480; negative_utc = false }
+       , Some { timestamp = 1428538899L; tz_offset = 480; negative_utc = false }
        , None
        , [||] )
        (* Empty message *)
@@ -280,9 +285,9 @@ let () =
          ; "c888305e1efbaa252d01b4e5e6b778f865a97514"
          ]
        , "Jiang Xin <worldhello.net@gmail.com>"
-       , Some { timestamp = 1428538899; tz_offset = 480; negative_utc = false }
+       , Some { timestamp = 1428538899L; tz_offset = 480; negative_utc = false }
        , "Jiang Xin <worldhello.net@gmail.com>"
-       , Some { timestamp = 1428538899; tz_offset = 480; negative_utc = false }
+       , Some { timestamp = 1428538899L; tz_offset = 480; negative_utc = false }
        , Some ""
        , [||] )
        (* Only full name *)
@@ -290,9 +295,11 @@ let () =
        , "85a74718d377195e1efd0843ba4f3260bad4fe07"
        , [ "01e2d0627a9a6edb24c37db45db5ecb31e9de808" ]
        , "Linus Torvalds <torvalds@linux-foundation.org>"
-       , Some { timestamp = 1436739030; tz_offset = -420; negative_utc = false }
+       , Some
+           { timestamp = 1436739030L; tz_offset = -420; negative_utc = false }
        , "Linus Torvalds <torvalds@linux-foundation.org>"
-       , Some { timestamp = 1436739030; tz_offset = -420; negative_utc = false }
+       , Some
+           { timestamp = 1436739030L; tz_offset = -420; negative_utc = false }
        , Some "Linux 4.2-rc2\n"
        , [| ("svn-repo-uuid", "046f1af7-66c2-d61b-5410-ce57b7db7bff")
           ; ("svn-revision", "10")
