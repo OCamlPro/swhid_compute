@@ -28,22 +28,20 @@ module Swhid_compute =
         | Ok content -> Some content
         | _ -> None
 
-      (* TODO: dune changes the permissions of the file, so it doesn't work. I choosed an example with only files with mode 644 (and media dir with a differont one hence the speciale case)... Otherwise, it should be :
-         let permissions name =
-            let name = Fpath.v name in
-            match Bos.OS.Path.stat name with
-            | Ok stat ->
-                (* TODO: actually, this is not simply st.perm, see :
-                 * https://unix.stackexchange.com/questions/450480/file-permission-with-six-bytes-in-git-what-does-it-mean
-                 * https://github.com/git/git/blob/master/Documentation/technical/index-format.txt
-                 * https://pubs.opengroup.org/onlinepubs/9699919799/basedefs/sys_stat.h.html
-                 *)
-                Some st.perm
-            | Error _e -> none
-      *)
-      let permissions = function
-        | "test_src/media" -> Some 16384
-        | _name -> Some 33188
+      let permissions name =
+        let name = Fpath.v name in
+        match Bos.OS.Path.stat name with
+        | Ok stat -> begin
+          match stat.st_kind with
+          | S_LNK -> Some 0o120000 (* symlinks *)
+          | S_DIR -> Some 0o040000 (* directories *)
+          | S_REG ->
+            if Bos.OS.File.is_executable name then
+              Some 0o100755 (* executable files *)
+            else Some 0o100644 (* normal files *)
+          | S_CHR | S_BLK | S_FIFO | S_SOCK -> None
+        end
+        | Error _e -> None
 
       let base name =
         let name = Fpath.v name in
