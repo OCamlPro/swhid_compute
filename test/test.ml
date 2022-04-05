@@ -527,10 +527,7 @@ let () =
   let expected_identifier =
     ((1, Directory, "05a38fcda98c037d0a9fa48d955acb7d7b0a884c"), [])
   in
-  match
-    Swhid_compute.directory_identifier_deep
-      "swh:1:dir:05a38fcda98c037d0a9fa48d955acb7d7b0a884c"
-  with
+  match Swhid_compute.directory_identifier_deep "test_src" with
   | None ->
     Format.eprintf "got None@.";
     assert false
