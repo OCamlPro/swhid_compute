@@ -12,7 +12,7 @@ tags: [
 homepage: "https://github.com/ocamlpro/swhid_compute"
 bug-reports: "https://github.com/ocamlpro/swhid_compute/issues"
 depends: [
-  "dune" {>= "2.8"}
+  "dune" {>= "3.0"}
   "ocaml" {>= "4.08"}
   "swhid_types"
   "digestif" {with-test}

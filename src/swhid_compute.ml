@@ -8,6 +8,8 @@ end) (OS : sig
   val read_file : string -> string option
 
   val permissions : string -> int option
+
+  val base : string -> string
 end) =
 struct
   (**/**)
@@ -165,13 +167,14 @@ struct
                 | None -> None
                 | Some content -> content_identifier content
               end
-              | Some "directory" -> directory_identifier_deep name
+              | Some "dir" -> directory_identifier_deep name
               | _unknown_type -> None
             in
             let permissions = OS.permissions name in
             match (typ, permissions, target) with
             | Some typ, Some permissions, Some target ->
               let target = Swhid_types.get_object_id target in
+              let name = OS.base name in
               Some { typ; permissions; target; name }
             | _ -> None )
           contents

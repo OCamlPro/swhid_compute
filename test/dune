@@ -1,4 +1,6 @@
 (test
  (name test)
  (modules test)
+ (deps
+  (glob_files_rec swh:1:dir:05a38fcda98c037d0a9fa48d955acb7d7b0a884c/*))
  (libraries bos digestif swhid_compute))

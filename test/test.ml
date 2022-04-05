@@ -19,7 +19,7 @@ module Swhid_compute =
         | Ok true -> Some "file"
         | Ok false | Error _ -> (
           match Bos.OS.Dir.exists name with
-          | Ok true -> Some "directory"
+          | Ok true -> Some "dir"
           | Ok false | Error _ -> None )
 
       let read_file name =
@@ -28,11 +28,29 @@ module Swhid_compute =
         | Ok content -> Some content
         | _ -> None
 
-      let permissions name =
+      (* TODO: dune changes the permissions of the file, so it doesn't work. I choosed an example with only files with mode 644 (and media dir with a differont one hence the speciale case)... Otherwise, it should be :
+         let permissions name =
+            let name = Fpath.v name in
+            match Bos.OS.Path.stat name with
+            | Ok stat ->
+                (* TODO: actually, this is not simply st.perm, see :
+                 * https://unix.stackexchange.com/questions/450480/file-permission-with-six-bytes-in-git-what-does-it-mean
+                 * https://github.com/git/git/blob/master/Documentation/technical/index-format.txt
+                 * https://pubs.opengroup.org/onlinepubs/9699919799/basedefs/sys_stat.h.html
+                 *)
+                Some st.perm
+            | Error _e -> none
+      *)
+      let permissions = function
+        | "swh:1:dir:05a38fcda98c037d0a9fa48d955acb7d7b0a884c/media" ->
+          Some 16384
+        | _name -> Some 33188
+
+      let base name =
         let name = Fpath.v name in
-        match Bos.OS.Path.stat name with
-        | Ok stats -> Some stats.st_perm
-        | Error _e -> None
+        let name = Fpath.normalize name in
+        let name = Fpath.base name in
+        Fpath.to_string name
     end)
 
 let type_to_string = function
@@ -503,3 +521,21 @@ let () =
     in
     assert false
   with Invalid_argument _ -> ()
+
+(* test directory_identifier_deep *)
+let () =
+  let expected_identifier =
+    ((1, Directory, "05a38fcda98c037d0a9fa48d955acb7d7b0a884c"), [])
+  in
+  match
+    Swhid_compute.directory_identifier_deep
+      "swh:1:dir:05a38fcda98c037d0a9fa48d955acb7d7b0a884c"
+  with
+  | None ->
+    Format.eprintf "got None@.";
+    assert false
+  | Some identifier ->
+    let ok = expected_identifier = identifier in
+    let (_scheme_version, _o_type, identifier), _qualifiers = identifier in
+    if not ok then Format.eprintf "NOT OK, got: `%s`@." identifier;
+    assert ok
